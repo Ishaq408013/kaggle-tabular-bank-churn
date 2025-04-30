@@ -1,79 +1,85 @@
 # Bank Customer Churn Prediction – Kaggle Tabular Project
 
-## One Sentence Summary
-This repository contains an implementation of a machine learning pipeline to predict bank customer churn, based on the [Playground Series - Season 4, Episode 1](https://www.kaggle.com/competitions/playground-series-s4e1) Kaggle competition.
+* **One Sentence Summary**  
+  This repository contains an attempt to predict bank customer churn using structured data from the [Playground Series - Season 4, Episode 1](https://www.kaggle.com/competitions/playground-series-s4e1) Kaggle challenge.
 
 ## Overview
 
-### Task Definition
-The goal of the project is to build a binary classification model to predict whether a customer will close their bank account (`Exited` = 1) based on demographic and financial account features.
+* **Definition of the task / challenge**  
+  The task is to predict whether a customer will close their bank account (`Exited` = 1) based on a variety of demographic and financial features. The dataset is tabular, and this is a binary classification problem.
 
-### Approach
-This project formulates the task as a supervised classification problem. Preprocessing steps included one-hot encoding of categorical features, feature scaling for numerical columns, and dropping identifier columns. A Random Forest Classifier was used as the baseline model due to its robustness and compatibility with tabular data.
+* **Approach**  
+  This repository treats the problem as a supervised learning classification task. A Random Forest classifier is trained on preprocessed data. Preprocessing included one-hot encoding for categorical features, standardization of numeric features, and removal of ID fields.
 
-### Performance Summary
-The final Random Forest model achieved a validation accuracy of approximately **X%** and a validation F1-score of **Y**. A Kaggle submission file was generated from test predictions.
+* **Summary of the performance achieved**  
+  The final model achieved a validation accuracy of approximately **X%** and an F1-score of **Y** on the held-out validation data. A Kaggle submission was generated for external evaluation.
 
-## Summary of Work Done
+## Summary of Workdone
 
 ### Data
 
-- Type: Tabular CSV data
-- Input: Demographic and financial information for each customer
-- Target: `Exited` (0 = retained, 1 = exited)
-- Size:
-  - Training set: ~8,000 rows
-  - Test set: ~4,000 rows
+* **Data**:
+  * Type:
+    * Input: Tabular data (CSV format) with demographic and financial features
+    * Output: Binary flag (`Exited`: 1 = churned, 0 = retained)
+  * Size:
+    * Training set: ~8,000 rows
+    * Test set: ~4,000 rows
+  * Instances (Train, Test, Validation Split):
+    * 64% training, 16% validation, 20% internal test
 
-### Preprocessing and Clean-Up
+#### Preprocessing / Clean Up
 
-- Dropped unnecessary columns (`id`, `CustomerId`, `Surname`)
-- Encoded categorical features (`Gender`, `Geography`) using one-hot encoding
-- Applied standard scaling to numerical features
-- Checked and documented class imbalance (~20% exited)
+* Dropped non-informative columns: `id`, `CustomerId`, and `Surname`
+* One-hot encoded the `Gender` and `Geography` columns
+* Standardized numerical features using `StandardScaler`
+* Verified there were no missing values
+* Analyzed class imbalance (roughly 20% of customers churned)
+* Detected and described outliers using the IQR method
 
-### Data Visualization
+#### Data Visualization
 
-- Histograms comparing distributions of numerical features by `Exited` status
-- Bar plots and cross-tabulations for categorical features
-- Observations indicated strong separation for features like `Age`, `Balance`, and `IsActiveMember`
+* Created histograms of numerical features grouped by `Exited`
+* Created bar plots and cross-tabulations for categorical features
+* Found that `Age`, `Balance`, and `IsActiveMember` showed the strongest separation between classes
 
 ## Problem Formulation
 
-- Input: Cleaned feature matrix including both numerical and encoded categorical variables
-- Output: Binary class label (0 or 1 indicating churn)
+* **Input**: Tabular features after encoding and scaling
+* **Output**: Binary label indicating churn status (0 or 1)
 
 ## Models
 
-- Model: Random Forest Classifier
-- Reason: Performs well on structured/tabular data with minimal tuning
-- Hyperparameters: Default parameters with `random_state=42`
+* Random Forest Classifier from `scikit-learn`
+* Reason for choice: Handles tabular data well, robust to outliers and requires minimal hyperparameter tuning
+* Hyperparameters used: Default (`random_state=42`)
 
 ## Training
 
-- Platform: Local Jupyter Notebook (MacBook Pro with Python 3.12)
-- Frameworks: scikit-learn, pandas, matplotlib
-- Time: Less than 1 minute (no GPU needed)
-- No overfitting observed; training stopped after initial evaluation
+* Platform: Jupyter Notebook on local machine (MacBook Pro, Python 3.12)
+* Libraries used: `pandas`, `scikit-learn`, `matplotlib`, `seaborn`
+* Training time: Less than 1 minute (model is not compute intensive)
+* Training was stopped after baseline model evaluation
 
 ## Performance Comparison
 
-- Metrics: Accuracy, F1-Score, and confusion matrix on validation set
-- Final validation accuracy: **X%**
-- Submission results generated using the trained model applied to the Kaggle test set
+* Key metrics: Accuracy, F1-score, confusion matrix
+* Final validation accuracy: **X%**
+* Submission file (`submission.csv`) was generated from predictions on the test dataset
 
 ## Conclusions
 
-- The model successfully identifies predictive features of churn
-- Features such as `Age`, `Balance`, and `IsActiveMember` were most impactful
-- Random Forest is an effective baseline for this task
+* Random Forest provided reliable performance with default settings
+* Features like `Age`, `Balance`, and `IsActiveMember` were most predictive of churn
+* The pipeline provides a solid baseline and is easy to build upon
 
 ## Future Work
 
-- Experiment with XGBoost or LightGBM
-- Perform feature selection or SHAP analysis for interpretability
-- Address class imbalance using SMOTE or class weights
-- Automate hyperparameter tuning with GridSearchCV
+* Evaluate performance using boosting models like XGBoost or LightGBM
+* Perform feature importance and SHAP value analysis
+* Explore oversampling methods like SMOTE to balance the classes
+* Conduct hyperparameter tuning using GridSearchCV
+
 
 ## Software Setup
 
