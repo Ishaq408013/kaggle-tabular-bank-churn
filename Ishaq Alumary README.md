@@ -14,77 +14,109 @@
 * **Summary of the performance achieved**  
   The model achieved a validation accuracy of approximately 84% and an F1-score of 0.72. 
 
+---
+
 ## Summary of Workdone
 
 ### Data
 
-* Data:
-  * Type:
-    * Input: CSV files containing customer demographic and financial activity features
-    * Output: A binary label (`Exited`) representing churn (1) or retention (0)
-  * Size:
-    * Training set: ~8,000 entries
-    * Test set: ~4,000 entries
-  * Instances:
-    * 64% used for training, 16% for validation, 20% for testing
+* **Type**:
+  * Input: Tabular CSV files with demographic and financial information
+  * Output: Binary target column `Exited`
+* **Size**:
+  * ~8,000 rows (train), ~4,000 rows (test)
+* **Splits**:
+  * 64% train, 16% validation, 20% test
 
-#### Preprocessing / Clean up
+---
 
-* Dropped identifier columns (`id`, `CustomerId`, `Surname`)
-* One-hot encoded categorical features (`Gender`, `Geography`)
-* Scaled numerical columns using `StandardScaler`
-* Verified there were no missing values
-* Detected and described outliers using the 1.5×IQR method
-* Verified mild class imbalance (about 20% churned)
+### Preprocessing and Clean-up
 
-#### Data Visualization
+- Dropped ID-related columns: `id`, `CustomerId`, `Surname`
+- One-hot encoded: `Gender`, `Geography`
+- Scaled numerical columns using `StandardScaler`
+- Detected outliers using IQR method (not removed)
+- Verified no missing values
+- Confirmed mild class imbalance (~20% churned)
 
-* Plotted histograms of numerical features grouped by class (`Exited`)
-* Plotted stacked bar graphs for categorical features
-* Observed `Age`, `Balance`, and `IsActiveMember` as strong indicators of churn
+---
+
+### Feature Summary Table
+
+<img width="815" alt="Screenshot 2025-05-02 at 11 33 14 AM" src="https://github.com/user-attachments/assets/5b78cf9b-36eb-421d-8412-86e94e98461b" />
+
+---
+
+### Data Visualization
+
+#### Numerical Feature Distributions by Class
+<img width="1022" alt="Screenshot 2025-05-02 at 11 30 37 AM" src="https://github.com/user-attachments/assets/4dff2ea7-2681-494f-89b3-1c5669899342" />
+
+Visualized feature distributions across churn vs retained customers:
+
+
+#### Categorical Feature Distributions
+
+Comparison of categorical variables between churn classes:
+<img width="926" alt="Screenshot 2025-05-02 at 11 34 56 AM" src="https://github.com/user-attachments/assets/9913afa4-306d-4cf1-a533-43c4cb5c72cb" />
+
+
+---
 
 ### Problem Formulation
 
-* **Input**: Cleaned tabular data (numerical + one-hot encoded features)
-* **Output**: Binary target variable (`Exited`)
-* **Models**:
-  * Random Forest Classifier
-  * Chosen for its high performance on tabular datasets and minimal tuning
-* **Hyperparameters**:
-  * Default parameters (`random_state=42`)
+* **Input**: Cleaned feature matrix (numerical + categorical)
+* **Output**: Binary label (`Exited`)
+* **Model**: Random Forest Classifier (default hyperparameters)
+* **Why**: Works well on structured/tabular data, minimal tuning required
+
+---
 
 ### Training
 
-* **Software**: Jupyter Notebook, Python 3.12, scikit-learn
-* **Hardware**: MacBook Pro (no GPU)
-* **Duration**: Less than 1 minute
-* **Stopping Criteria**: Model was stable with default settings
-* **Challenges**: None significant; model trained efficiently without overfitting
+* **Tools**: Python 3.12, scikit-learn, Jupyter Notebook
+* **Platform**: MacBook Pro (no GPU)
+* **Training Time**: < 1 minute
+* **Split**: Train / Validation / Test
 
-### Performance Comparison
+---
 
-* **Metrics Used**: Accuracy, F1-Score, Confusion Matrix
-* **Validation Results**:
-  * Accuracy: 84%
-  * F1 Score: 0.72
-* **Submission File**: `submission/submission.csv` generated from test data
+### Performance Evaluation
+
+- **Accuracy**: 85.7%
+- **F1 Score**: 0.72 (overall)
+- **Evaluation Tools**: Accuracy, F1, confusion matrix
+
+#### Classification Report & Confusion Matrix
+
+<img width="546" alt="Screenshot_Confusion_Matrix" src="https://github.com/user-attachments/assets/ccff28f4-736c-4787-a7e1-0de8fc21fbd2" />
+
+
+---
 
 ### Conclusions
 
-* Random Forest achieved reliable performance with minimal tuning
-* Strongest predictive features were `Age`, `Balance`, and `IsActiveMember`
-* Feature engineering and model tuning can further improve performance
+* Random Forest gave strong results with default tuning
+* Most predictive features:
+  * Age
+  * Balance
+  * IsActiveMember
+* Future improvements could come from ensemble methods or tuning
+
+---
 
 ### Future Work
 
-* Add models such as XGBoost or LightGBM for comparison
-* Use SHAP values or permutation importance for explainability
-* Apply SMOTE or class weighting to address imbalance
-* Perform hyperparameter tuning via GridSearchCV
+- Try XGBoost, LightGBM
+- Use SHAP values for explainability
+- Address class imbalance with SMOTE
+- Tune hyperparameters with GridSearchCV
+
+---
+
+## Repository Overview
 
 
-
-### Overview of files in repository
 
 * `data/train.csv`: Training dataset  
 * `data/test.csv`: Test dataset  
