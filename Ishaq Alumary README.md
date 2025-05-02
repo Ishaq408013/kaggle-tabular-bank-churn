@@ -45,12 +45,15 @@
 
 <img width="815" alt="Screenshot 2025-05-02 at 11 33 14 AM" src="https://github.com/user-attachments/assets/5b78cf9b-36eb-421d-8412-86e94e98461b" />
 
+> This table provides an overview of each feature's type, range, and missing values. It helped guide data cleaning, scaling, and encoding decisions.
+
 ---
 
 ### Data Visualization
 
 #### Numerical Feature Distributions by Class
 <img width="1022" alt="Screenshot 2025-05-02 at 11 30 37 AM" src="https://github.com/user-attachments/assets/4dff2ea7-2681-494f-89b3-1c5669899342" />
+
 
 Visualized feature distributions across churn vs retained customers:
 
