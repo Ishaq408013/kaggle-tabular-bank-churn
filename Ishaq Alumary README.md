@@ -1,3 +1,4 @@
+![](UTA-DataScience-Logo.png)
 # Bank Customer Churn Prediction
 
 * **One Sentence Summary**  
@@ -38,6 +39,12 @@
 - Detected outliers using IQR method (not removed)
 - Verified no missing values
 - Confirmed mild class imbalance (~20% churned)
+  
+  The figure below shows the distribution of four key numerical features—Credit Score, Age, Balance, and Estimated Salary—before and after applying `StandardScaler`. While the shape of each distribution remains unchanged, the scaling standardizes the feature ranges around a mean of 0 and standard deviation of 1. This is especially important for models sensitive to feature magnitudes, like logistic regression or SVMs, and ensures that features contribute equally.
+<img width="801" alt="Screenshot 2025-05-04 at 9 21 19 AM" src="https://github.com/user-attachments/assets/45dec799-f6fe-440b-b081-1381be80d515" />
+
+
+
 
 ---
 
@@ -52,6 +59,8 @@
 ### Data Visualization
 
 #### Numerical Feature Distributions by Class
+This visualization compares the distributions of key numerical features (e.g., `Age`, `CreditScore`, `Balance`, `EstimatedSalary`) between customers who stayed (`Exited = 0`) and those who churned (`Exited = 1`). Notably, churned customers tended to be older, less likely to be active members, and had slightly higher balances.
+
 <img width="1022" alt="Screenshot 2025-05-02 at 11 30 37 AM" src="https://github.com/user-attachments/assets/4dff2ea7-2681-494f-89b3-1c5669899342" />
 
 
@@ -61,6 +70,9 @@ Visualized feature distributions across churn vs retained customers:
 #### Categorical Feature Distributions
 
 Comparison of categorical variables between churn classes:
+
+The chart below illustrates the distribution of churn (`Exited`) across categorical features such as `Surname`, `Geography`, and `Gender`. As expected, `Surname` shows no predictive power, while `Geography` and `Gender` demonstrate clearer trends—particularly with higher churn rates in Germany and among female customers. These insights guided feature selection and one-hot encoding during preprocessing.
+
 <img width="926" alt="Screenshot 2025-05-02 at 11 34 56 AM" src="https://github.com/user-attachments/assets/9913afa4-306d-4cf1-a533-43c4cb5c72cb" />
 
 
@@ -91,6 +103,7 @@ Comparison of categorical variables between churn classes:
 - **Evaluation Tools**: Accuracy, F1, confusion matrix
 
 #### Classification Report & Confusion Matrix
+The classification report and confusion matrix below illustrate the model’s performance on the validation set. The model achieved an overall accuracy of **85.7%**, with an F1-score of **0.91** for the majority class (retained customers) and **0.61** for the minority class (churned customers). The confusion matrix shows the model correctly predicted most retained customers, though it missed some churned cases—highlighting the impact of class imbalance.
 
 <img width="546" alt="Screenshot_Confusion_Matrix" src="https://github.com/user-attachments/assets/ccff28f4-736c-4787-a7e1-0de8fc21fbd2" />
 
